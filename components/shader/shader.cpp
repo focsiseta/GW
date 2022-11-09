@@ -33,7 +33,7 @@ void Shader::uFloat(std::string&& uniformName, float data) {
 
 }
 Shader::~Shader() {
-	std::cout << "shader " << this->shader_name << " is being destroyed\n";
+	std::cout << "shader " << this->test << " is being destroyed\n";
 }
 
 Shader::Shader(const char* name, const char* vsPath, const char* fsPath) {
@@ -47,6 +47,11 @@ Shader::Shader(const char* name, const char* vsPath, const char* fsPath) {
 		char default_name[64]{ '\0' };
 		sprintf_s(default_name, "shader_%d", shaderCounter);
 		std::memcpy(this->shader_name, default_name, sizeof(default_name));
+	}
+	else {
+		
+		std::memcpy(this->shader_name, name, sizeof(name));
+
 	}
 
 
@@ -107,6 +112,16 @@ Shader::Shader(const char* name, const char* vsPath, const char* fsPath) {
 			}
 			this->uniformMap.insert({ uniformName,location });
 		}
+	START_DEBUG
+		printLog(0);
+		printLog(1);
+		printLog(2);
+		END_DEBUG
+			this->test = "OOO";
+}
+void Shader::printName() {
+	
+	std::cout << this->shader_name << std::endl;
 
 }
 //This parser doesn't account for struct that can appear in shader, I'll need a more sofisticated one
@@ -144,14 +159,14 @@ void Shader::printLog(int which) {
 	switch (which)
 	{
 	case 0: {
-		std::cout << this->logVS << std::endl;
+		std::cout << "VERTEX SHADER LOG :" << this->logVS << std::endl;
 		break;
 	}
 	case 1: {
-		std::cout << this->logFS << std::endl;
+		std::cout << "FRAGMENT SHADER LOG :" << this->logFS << std::endl;
 	}
 	case 2: {
-		std::cout << this->uniformLog << std::endl;
+		std::cout << "UNIFORMS LOG :" << this->uniformLog << std::endl;
 	}
 	default: break;
 	}

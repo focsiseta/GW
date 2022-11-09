@@ -28,10 +28,12 @@ private:
 	std::unordered_map<std::string, GLint> uniformMap;
 	std::vector<std::string> parseShader(std::string& vertex);
 public:
+	std::string test;
 	unsigned int program;
 	Shader(const char* shader_name, const char* vspath, const char* fspath);
 	// 0 = vertex 1 = fragment
 	void printLog(int which);
+	void printName();
 	void useProgram();
 	void uMat4(std::string& uniformName, glm::mat4& data, bool transpose);
 	void uMat4(std::string& uniformName, glm::mat4&& data, bool transpose);
